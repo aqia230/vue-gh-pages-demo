@@ -25,3 +25,19 @@ steps:
       from_secret: password
     pages_directory: dist
     target_directory: 20213
+
+
+- name: scp
+  image: appleboy/drone-scp
+  pull: always
+  settings:
+    host: dev_host
+    port: 22
+    username: dev_username
+    password: dev_password
+    target: /home/vue-manage-server
+    source: .
+    rm: true
+    when:
+      event: [push, pull_request]
+      branch: [gh_pages]
